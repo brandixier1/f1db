@@ -1,338 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brandix Operational Dashboard | F1 Blue</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+#loader {
+        background-color: #050508;
+        background-image: 
+            radial-gradient(circle at 50% 50%, #10101a 0%, #050508 100%);
+    }
 
-    <style>
-        :root {
-            --racing-black: #0a0a0f; 
-            --carbon-fiber: #14141a; 
-            --neon-blue: #00f7ff;    
-            --neon-red: #ff003c;
-            --text-hud: #e0e0e0;     
-            --sidebar-width: 280px;
-        }
+    .f1-visual {
+        overflow: visible;
+        filter: drop-shadow(0 0 8px rgba(0, 247, 255, 0.4));
+    }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Rajdhani', sans-serif;
-            display: flex; 
-            height: 100vh; 
-            overflow: hidden; 
-            background: var(--racing-black); 
-            color: var(--text-hud);
-        }
+    /* Wind Flow Animation */
+    .telemetry-wave {
+        fill: none;
+        stroke: var(--neon-blue);
+        stroke-width: 0.5;
+        opacity: 0.5;
+        animation: windFlow 2s linear infinite;
+    }
 
-        /* === SIDEBAR === */
-        #sidebar {
-            width: var(--sidebar-width);
-            background: var(--carbon-fiber);
-            display: flex;
-            flex-direction: column;
-            border-right: 1px solid rgba(0, 247, 255, 0.2);
-            box-shadow: 10px 0 30px rgba(0,0,0,0.8);
-            z-index: 100;
-        }
+    @keyframes windFlow {
+        from { stroke-dashoffset: 100; }
+        to { stroke-dashoffset: 0; }
+    }
 
-        .logo-area {
-            padding: 30px 20px;
-            text-align: center;
-            background: repeating-linear-gradient(45deg, #1a1a22, #1a1a22 10px, #14141a 10px, #14141a 20px);
-            border-bottom: 3px solid var(--neon-blue);
-            flex-shrink: 0;
-        }
+    /* Car Blueprint Drawing Effect */
+    .car-outline path, .car-outline circle {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        animation: drawBlueprint 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
 
-        .logo-area h2 { 
-            font-weight: 800;
-            letter-spacing: 4px;
-            color: #ffffff; 
-            text-transform: uppercase; 
-            font-size: 1.8rem;
-            text-shadow: 0 0 15px var(--neon-blue);
-        }
+    @keyframes drawBlueprint {
+        to { stroke-dashoffset: 0; }
+    }
 
-        /* === COLLAPSIBLE NAV AREA === */
-        .nav-container {
-            flex-grow: 1;
-            overflow-y: auto;
-            padding: 10px 0;
-            scrollbar-width: none; /* Hide scrollbar for clean HUD look */
-        }
-        .nav-container::-webkit-scrollbar { display: none; }
+    /* Flickering Data Text */
+    .status-msg {
+        animation: flicker 0.1s infinite secondary;
+    }
 
-        /* SECTOR GROUP */
-        .nav-group {
-            margin-bottom: 2px;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
-        }
-
-        /* THE CLICKABLE/HOVER HEADER */
-        .nav-sector-header {
-            width: 100%;
-            padding: 15px 20px;
-            background: transparent;
-            color: var(--neon-blue);
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .nav-sector-header:hover {
-            background: rgba(0, 247, 255, 0.05);
-        }
-
-        .nav-sector-header i.chevron {
-            font-size: 0.7rem;
-            transition: transform 0.3s;
-        }
-
-        /* HIDDEN LIST BY DEFAULT */
-        .nav-menu {
-            list-style: none;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out;
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        /* OPEN STATE (Triggered via Hover or JS Click) */
-        .nav-group:hover .nav-menu {
-            max-height: 500px; /* Big enough to show all links */
-        }
-
-        .nav-group:hover .chevron {
-            transform: rotate(180deg);
-        }
-
-        .nav-item {
-            padding: 12px 30px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.4);
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .nav-item i { margin-right: 12px; width: 15px; font-size: 0.8rem; }
-
-        .nav-item:hover { 
-            color: var(--neon-blue);
-            background: rgba(0, 247, 255, 0.03);
-        }
-
-        .nav-item.active {
-            color: #fff;
-            background: rgba(0, 247, 255, 0.1);
-            border-right: 3px solid var(--neon-blue);
-        }
-
-        /* === MAIN CONTENT === */
-        #main-content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            background: var(--racing-black);
-        }
-
-        header {
-            height: 85px;
-            background: var(--carbon-fiber);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 40px;
-            border-bottom: 1px solid rgba(0, 247, 255, 0.2);
-        }
-
-        .report-title { font-weight: 800; color: #fff; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; }
-
-        .telemetry-strip { display: flex; gap: 30px; align-items: center; }
-        .stat-box { display: flex; flex-direction: column; align-items: flex-end; }
-        .stat-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); letter-spacing: 1px; }
-        .stat-value { color: var(--neon-blue); font-weight: 700; font-size: 1.3rem; }
-
-        .f1-btn {
-            padding: 8px 20px;
-            cursor: pointer;
-            border: 1px solid var(--neon-blue);
-            background: transparent;
-            color: var(--neon-blue);
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-        }
-
-        .iframe-container { flex-grow: 1; padding: 15px; background: #000; }
-        iframe { width: 100%; height: 100%; border: 1px solid #222; border-radius: 4px; }
-
-        .footer-status {
-            padding: 8px 30px;
-            font-size: 0.7rem;
-            background: #050508;
-            display: flex;
-            justify-content: space-between;
-            color: rgba(255,255,255,0.3);
-        }
-
-        .blink { animation: pulse 2s infinite; color: var(--neon-blue); }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-    </style>
-</head>
-<body>
-
-    <aside id="sidebar">
-        <div class="logo-area">
-            <h2>BRANDIX</h2>
-            <div class="logo-sub">OPERATIONAL COCKPIT</div>
-        </div>
-        
-        <div class="nav-container">
-            <div class="nav-group">
-                <div class="nav-sector-header">
-                    <span><i class="fas fa-microchip"></i> Sector 01: Production</span>
-                    <i class="fas fa-chevron-down chevron"></i>
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item active" onclick="loadDashboard('LIVE TELEMETRY: FIRST HOUR EFFICIENCY DB'https://app.powerbi.com/reportEmbed?reportId=e31a2005-48e3-4664-9836-01d808b063b1&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)">
-                        <i class="fas fa-caret-right"></i> Race Pace - First Hour EFF
-                    </li>
-                    <li class="nav-item" onclick="loadDashboard('SAH RECONCILATION & OPEN MODULE', 'https://app.powerbi.com/reportEmbed?reportId=bb05ff37-0b13-419b-9809-760177045c93&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)">
-                        <i class="fas fa-caret-right"></i> SAH Recon & Open Mod
-                    </li>
-                    <li class="nav-item" onclick="loadDashboard('CUSTOMER WISE EFFICIENCY', 'https://app.powerbi.com/groups/me/reports/87d82c04-deb5-47a2-bc1c-8ba7216efe28/8b2c1e0e9d1141629e43?ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f&experience=power-bi', this)">
-                        <i class="fas fa-caret-right"></i> Customer wise EFF
-                    </li>
-                </ul>
-            </div>
-
-            <div class="nav-group">
-                <div class="nav-sector-header">
-                    <span><i class="fas fa-truck-fast"></i> Sector 02: Component Supply </span>
-                    <i class="fas fa-chevron-down chevron"></i>
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item" onclick="loadDashboard('CENTRAL WAREHOUSE MATERIAL REQUEST', 'https://app.powerbi.com/reportEmbed?reportId=eb5d0173-5ccb-4118-be40-6882f3e166d6&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)">
-                        <i class="fas fa-caret-right"></i> CWH REQUES
-                    </li>
-                    <li class="nav-item" onclick="loadDashboard('RM FULFILMENT TRACKER', 'https://app.powerbi.com/groups/d4b9b3ef-47ef-442d-89a0-7135f5cba488/reports/20befc84-2349-4018-acfa-912896069d3b/832d904d3cc4776e5258?experience=power-bi', this)">
-                        <i class="fas fa-caret-right"></i> RM Fulfilment Tracker
-                    </li>
-                </ul>
-            </div>
-
-            <div class="nav-group">
-                <div class="nav-sector-header">
-                    <span><i class="fas fa-clipboard-check"></i> Sector 03: Quality</span>
-                    <i class="fas fa-chevron-down chevron"></i>
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item" onclick="loadDashboard('COST OF QUALITY (COST)', 'LINK_6', this)">
-                        <i class="fas fa-caret-right"></i> Cost of Quality
-                    </li>
-                    <li class="nav-item" onclick="loadDashboard('RFT', 'https://app.powerbi.com/reportEmbed?reportId=38563379-de55-42bf-ad9a-94ac05df5206&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D', this)">
-                        <i class="fas fa-caret-right"></i> RFT
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="nav-group">
-                <div class="nav-sector-header">
-                    <span><i class="fas fa-gas-pump"></i> Sector 04: Finance</span>
-                    <i class="fas fa-chevron-down chevron"></i>
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item" onclick="loadDashboard('FUEL BURN (COST)', 'LINK_6', this)">
-                        <i class="fas fa-caret-right"></i> Budget Cap
-                    </li>
-                    <li class="nav-item" onclick="loadDashboard('PROCUREMENT', 'LINK_7', this)">
-                        <i class="fas fa-caret-right"></i> Invoice Sync
-                    </li>
-                </ul>
-            </div>
-
-            <div class="nav-group">
-                <div class="nav-sector-header">
-                    <span><i class="fas fa-users-gear"></i> Sector 05: Resources</span>
-                    <i class="fas fa-chevron-down chevron"></i>
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item" onclick="loadDashboard('PIT CREW HR', 'LINK_8', this)">
-                        <i class="fas fa-caret-right"></i> Team Roster
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div style="padding: 15px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
-             <div class="blink" style="font-size: 0.75rem;">● SYSTEM ONLINE</div>
-        </div>
-    </aside>
-
-    <main id="main-content">
-        <header>
-            <div class="report-title" id="current-title">LIVE TELEMETRY: RACE PACE</div>
-            <div class="telemetry-strip">
-                <div class="stat-box"><span class="stat-label">SESSION TIME</span><span class="stat-value" id="session-clock">00:00:00</span></div>
-                <div class="stat-box"><span class="stat-label">EFFICIENCY</span><span class="stat-value">98.2%</span></div>
-                <div class="stat-box"><span class="stat-label">DEFECTS</span><span class="stat-value" style="color:var(--neon-red)">0.04%</span></div>
-                <button class="f1-btn" onclick="toggleFullScreen()">Maximize</button>
-            </div>
-        </header>
-
-        <div class="iframe-container">
-            <iframe id="report-frame" src="https://app.powerbi.com/reportEmbed?reportId=e31a2005-48e3-4664-9836-01d808b063b1&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f" allowfullscreen></iframe>
-        </div>
-
-        <div class="footer-status">
-            <span>BRANDIX_CORE_V2</span>
-            <span>DATA_STREAM: STABLE</span>
-        </div>
-    </main>
-
-    <script>
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('session-clock').innerText = now.toLocaleTimeString('en-GB', { hour12: false });
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        function loadDashboard(title, url, element) {
-            document.getElementById('current-title').innerText = title;
-            document.getElementById('report-frame').src = url;
-            let items = document.querySelectorAll('.nav-item');
-            items.forEach(item => item.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        function toggleFullScreen() {
-            let elem = document.getElementById("main-content");
-            if (elem.requestFullscreen) { elem.requestFullscreen(); } 
-        }
-    </script>
-</body>
-
-</html>
-
-
-
-
-
+    @keyframes flicker {
+        0% { opacity: 0.8; }
+        50% { opacity: 1; }
+        100% { opacity: 0.9; }
+    }
