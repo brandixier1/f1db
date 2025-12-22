@@ -47,68 +47,64 @@
     }
 
     .loader-content { text-align: center; width: 450px; position: relative; }
+    .f1-load-text { font-size: 1.4rem; font-weight: 800; letter-spacing: 8px; color: #fff; margin-bottom: 20px; text-transform: uppercase; text-shadow: 0 0 10px var(--neon-blue); }
+    .progress-container { width: 100%; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; position: relative; }
+    .progress-bar { width: 0%; height: 100%; background: var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue); animation: loadProgress 3s forwards cubic-bezier(0.4, 0, 0.2, 1); }
+    .status-msg { margin-top: 15px; font-size: 0.75rem; letter-spacing: 3px; color: var(--neon-blue); text-transform: uppercase; font-weight: 600; }
+    @keyframes loadProgress { 0% { width: 0%; } 100% { width: 100%; } }
 
-    /* F1 Car SVG Animation */
-    .f1-visual { width: 100%; margin-bottom: 30px; filter: drop-shadow(0 0 10px var(--neon-blue)); }
-    .car-outline { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: drawCar 3s ease-in-out forwards; }
+    /* === LANDING PAGE === */
+    #landing-page {
+        position: absolute;
+        top: 85px; left: var(--sidebar-width);
+        right: 0; bottom: 0;
+        background: var(--racing-black);
+        z-index: 50;
+        padding: 40px 60px;
+        overflow-y: auto;
+    }
+    .welcome-header h1 { font-size: 3rem; font-weight: 800; letter-spacing: 5px; color: #fff; margin-bottom: 10px; }
+    .welcome-header p { color: var(--neon-blue); letter-spacing: 3px; margin-bottom: 40px; font-weight: 600; }
     
-    /* Telemetry Line Animation */
-    .telemetry-wave {
-        stroke: var(--neon-blue);
-        stroke-width: 1;
-        fill: none;
-        stroke-dasharray: 50;
-        animation: waveMove 2s linear infinite;
-        opacity: 0.5;
+    .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .sector-card {
+        background: var(--carbon-fiber);
+        border: 1px solid rgba(0, 247, 255, 0.1);
+        padding: 25px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        border-left: 4px solid var(--neon-blue);
     }
-
-    @keyframes drawCar { to { stroke-dashoffset: 0; } }
-    @keyframes waveMove { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
-
-    .f1-load-text {
-        font-size: 1.4rem; font-weight: 800; letter-spacing: 8px;
-        color: #fff; margin-bottom: 20px; text-transform: uppercase;
-        text-shadow: 0 0 10px var(--neon-blue);
+    .sector-card:hover { border-color: var(--neon-blue); background: rgba(0, 247, 255, 0.05); transform: translateY(-5px); }
+    .sector-card i.main-icon { font-size: 1.8rem; color: var(--neon-blue); margin-bottom: 15px; display: block; }
+    .sector-card h3 { font-size: 1.3rem; letter-spacing: 1px; margin-bottom: 10px; color: #fff; text-transform: uppercase; }
+    
+    .sub-topic-container {
+        max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+        border-top: 1px solid rgba(255,255,255,0.05); margin-top: 10px;
     }
-
-    .progress-container {
-        width: 100%; height: 2px; background: rgba(255,255,255,0.1);
-        border-radius: 2px; overflow: hidden; position: relative;
+    .sector-card.expanded .sub-topic-container { max-height: 400px; padding-top: 15px; }
+    .landing-sub-link {
+        padding: 8px 0; color: rgba(255,255,255,0.5); display: flex; align-items: center;
+        font-weight: 600; font-size: 0.85rem; transition: 0.2s;
     }
+    .landing-sub-link:hover { color: var(--neon-blue); transform: translateX(5px); }
+    .landing-sub-link i { margin-right: 10px; font-size: 0.7rem; }
 
-    .progress-bar {
-        width: 0%; height: 100%; background: var(--neon-blue);
-        box-shadow: 0 0 15px var(--neon-blue);
-        animation: loadProgress 3s forwards cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .status-msg {
-        margin-top: 15px; font-size: 0.75rem; letter-spacing: 3px;
-        color: var(--neon-blue); text-transform: uppercase; font-weight: 600;
-    }
-
-    @keyframes loadProgress {
-        0% { width: 0%; }
-        100% { width: 100%; }
-    }
-
-    /* === REST OF YOUR STYLES (SIDEBAR & MAIN) === */
+    /* === SIDEBAR & MAIN === */
     #sidebar { width: var(--sidebar-width); background: var(--carbon-fiber); display: flex; flex-direction: column; border-right: 1px solid rgba(0, 247, 255, 0.2); box-shadow: 10px 0 30px rgba(0,0,0,0.8); z-index: 100; }
-    .logo-area { padding: 30px 20px; text-align: center; background: repeating-linear-gradient(45deg, #1a1a22, #1a1a22 10px, #14141a 10px, #14141a 20px); border-bottom: 3px solid var(--neon-blue); flex-shrink: 0; }
+    .logo-area { padding: 30px 20px; text-align: center; background: repeating-linear-gradient(45deg, #1a1a22, #1a1a22 10px, #14141a 10px, #14141a 20px); border-bottom: 3px solid var(--neon-blue); flex-shrink: 0; cursor: pointer; }
     .logo-area h2 { font-weight: 800; letter-spacing: 4px; color: #ffffff; text-transform: uppercase; font-size: 1.8rem; text-shadow: 0 0 15px var(--neon-blue); }
     .nav-container { flex-grow: 1; overflow-y: auto; padding: 10px 0; scrollbar-width: none; }
-    .nav-container::-webkit-scrollbar { display: none; }
     .nav-group { margin-bottom: 2px; border-bottom: 1px solid rgba(255,255,255,0.03); }
-    .nav-sector-header { width: 100%; padding: 15px 20px; background: transparent; color: var(--neon-blue); font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: background 0.3s; }
-    .nav-sector-header:hover { background: rgba(0, 247, 255, 0.05); }
-    .nav-sector-header i.chevron { font-size: 0.7rem; transition: transform 0.3s; }
+    .nav-sector-header { width: 100%; padding: 15px 20px; background: transparent; color: var(--neon-blue); font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
     .nav-menu { list-style: none; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: rgba(0, 0, 0, 0.2); }
     .nav-group:hover .nav-menu { max-height: 500px; }
-    .nav-group:hover .chevron { transform: rotate(180deg); }
     .nav-item { padding: 12px 30px; cursor: pointer; display: flex; align-items: center; transition: all 0.2s; font-size: 0.9rem; color: rgba(255,255,255,0.4); font-weight: 600; text-transform: uppercase; }
     .nav-item i { margin-right: 12px; width: 15px; font-size: 0.8rem; }
     .nav-item:hover { color: var(--neon-blue); background: rgba(0, 247, 255, 0.03); }
     .nav-item.active { color: #fff; background: rgba(0, 247, 255, 0.1); border-right: 3px solid var(--neon-blue); }
+    
     #main-content { flex-grow: 1; display: flex; flex-direction: column; background: var(--racing-black); }
     header { height: 85px; background: var(--carbon-fiber); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; border-bottom: 1px solid rgba(0, 247, 255, 0.2); }
     .report-title { font-weight: 800; color: #fff; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; }
@@ -117,7 +113,8 @@
     .stat-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); letter-spacing: 1px; }
     .stat-value { color: var(--neon-blue); font-weight: 700; font-size: 1.3rem; }
     .f1-btn { padding: 8px 20px; cursor: pointer; border: 1px solid var(--neon-blue); background: transparent; color: var(--neon-blue); font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); }
-    .iframe-container { flex-grow: 1; padding: 15px; background: #000; }
+    
+    .iframe-container { flex-grow: 1; padding: 15px; background: #000; display: none; }
     iframe { width: 100%; height: 100%; border: 1px solid #222; border-radius: 4px; }
     .footer-status { padding: 8px 30px; font-size: 0.7rem; background: #050508; display: flex; justify-content: space-between; color: rgba(255,255,255,0.3); }
     .blink { animation: pulse 2s infinite; color: var(--neon-blue); }
@@ -129,96 +126,130 @@
     <div id="loader">
         <div class="loader-content">
             <div class="f1-load-text">Initializing Systems</div>
-            <div class="progress-container">
-                <div class="progress-bar"></div>
-            </div>
+            <div class="progress-container"><div class="progress-bar"></div></div>
             <div class="status-msg" id="load-msg">Syncing Telemetry...</div>
         </div>
     </div>
 
     <aside id="sidebar">
-        <div class="logo-area">
+        <div class="logo-area" onclick="goHome()">
             <h2>BRANDIX</h2>
             <div class="logo-sub">OPERATIONAL COCKPIT</div>
         </div>
         
         <div class="nav-container">
             <div class="nav-group">
-                <div class="nav-sector-header">
-                    <span><i class="fas fa-microchip"></i> Sector 01: Production</span>
-                    <i class="fas fa-chevron-down chevron"></i>
-                </div>
+                <div class="nav-sector-header"><span><i class="fas fa-microchip"></i> Sector 01: Production</span><i class="fas fa-chevron-down chevron"></i></div>
                 <ul class="nav-menu">
-                    <li class="nav-item active" onclick="loadDashboard('LIVE TELEMETRY: FIRST HOUR EFFICIENCY', 'https://app.powerbi.com/reportEmbed?reportId=e31a2005-48e3-4664-9836-01d808b063b1&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)">
-                        <i class="fas fa-caret-right"></i> First Hour EFF
-                    </li>
-                    <li class="nav-item" onclick="loadDashboard('SAH RECONCILIATION', 'https://app.powerbi.com/reportEmbed?reportId=bb05ff37-0b13-419b-9809-760177045c93&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)">
-                        <i class="fas fa-caret-right"></i> SAH Recon
-                    </li>
-                    <li class="nav-item" onclick="loadDashboard('CUSTOMER WISE EFFICIENCY', 'https://app.powerbi.com/groups/me/reports/87d82c04-deb5-47a2-bc1c-8ba7216efe28/8b2c1e0e9d1141629e43?ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)">
-                        <i class="fas fa-caret-right"></i> Customer EFF
-                    </li>
+                    <li class="nav-item" id="side-p1" onclick="loadDashboard('FIRST HOUR EFFICIENCY', 'https://app.powerbi.com/reportEmbed?reportId=e31a2005-48e3-4664-9836-01d808b063b1&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)"><i class="fas fa-caret-right"></i> First Hour EFF</li>
+                    <li class="nav-item" id="side-p2" onclick="loadDashboard('SAH RECONCILIATION', 'https://app.powerbi.com/reportEmbed?reportId=bb05ff37-0b13-419b-9809-760177045c93&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)"><i class="fas fa-caret-right"></i> SAH Recon</li>
+                    <li class="nav-item" id="side-p3" onclick="loadDashboard('CUSTOMER WISE EFFICIENCY', 'https://app.powerbi.com/groups/me/reports/87d82c04-deb5-47a2-bc1c-8ba7216efe28/8b2c1e0e9d1141629e43?ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)"><i class="fas fa-caret-right"></i> Customer EFF</li>
                 </ul>
             </div>
-
             <div class="nav-group">
-                <div class="nav-sector-header">
-                    <span><i class="fas fa-truck-fast"></i> Sector 02: Component Supply</span>
-                    <i class="fas fa-chevron-down chevron"></i>
-                </div>
+                <div class="nav-sector-header"><span><i class="fas fa-truck-fast"></i> Sector 02: Component Supply</span><i class="fas fa-chevron-down chevron"></i></div>
                 <ul class="nav-menu">
-                    <li class="nav-item" onclick="loadDashboard('WAREHOUSE REQUESTS', 'https://app.powerbi.com/reportEmbed?reportId=eb5d0173-5ccb-4118-be40-6882f3e166d6&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)">
-                        <i class="fas fa-caret-right"></i> CWH Requests
-                    </li>
-                    <li class="nav-item" onclick="loadDashboard('RM FULFILMENT', 'https://app.powerbi.com/groups/d4b9b3ef-47ef-442d-89a0-7135f5cba488/reports/20befc84-2349-4018-acfa-912896069d3b/832d904d3cc4776e5258', this)">
-                        <i class="fas fa-caret-right"></i> RM Fulfilment
-                    </li>
+                    <li class="nav-item" id="side-s1" onclick="loadDashboard('WAREHOUSE REQUESTS', 'https://app.powerbi.com/reportEmbed?reportId=eb5d0173-5ccb-4118-be40-6882f3e166d6&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)"><i class="fas fa-caret-right"></i> CWH Requests</li>
+                    <li class="nav-item" id="side-s2" onclick="loadDashboard('RM FULFILMENT', 'https://app.powerbi.com/groups/d4b9b3ef-47ef-442d-89a0-7135f5cba488/reports/20befc84-2349-4018-acfa-912896069d3b/832d904d3cc4776e5258', this)"><i class="fas fa-caret-right"></i> RM Fulfilment</li>
                 </ul>
             </div>
-
             <div class="nav-group">
-                <div class="nav-sector-header">
-                    <span><i class="fas fa-clipboard-check"></i> Sector 03: Quality</span>
-                    <i class="fas fa-chevron-down chevron"></i>
-                </div>
+                <div class="nav-sector-header"><span><i class="fas fa-clipboard-check"></i> Sector 03: Quality</span><i class="fas fa-chevron-down chevron"></i></div>
                 <ul class="nav-menu">
-                    <li class="nav-item" onclick="loadDashboard('RFT TRACKER', 'https://app.powerbi.com/reportEmbed?reportId=38563379-de55-42bf-ad9a-94ac05df5206&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)">
-                        <i class="fas fa-caret-right"></i> RFT Performance
-                    </li>
+                    <li class="nav-item" id="side-q1" onclick="loadDashboard('RFT TRACKER', 'https://app.powerbi.com/reportEmbed?reportId=38563379-de55-42bf-ad9a-94ac05df5206&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)"><i class="fas fa-caret-right"></i> RFT Performance</li>
                 </ul>
             </div>
-
             <div class="nav-group">
-                <div class="nav-sector-header">
-                    <span><i class="fas fa-file-invoice-dollar"></i> Sector 04: Finance</span>
-                    <i class="fas fa-chevron-down chevron"></i>
-                </div>
+                <div class="nav-sector-header"><span><i class="fas fa-cog"></i> Sector 04: Engineering</span><i class="fas fa-chevron-down chevron"></i></div>
                 <ul class="nav-menu">
-                    <li class="nav-item" onclick="loadDashboard('BUDGET CAP', 'LINK_FINANCE', this)">
-                        <i class="fas fa-caret-right"></i> Financial Sync
-                    </li>
+                    <li class="nav-item" id="side-e1" onclick="loadDashboard('MACHINE UPTIME', '#', this)"><i class="fas fa-caret-right"></i> Machine Uptime</li>
                 </ul>
             </div>
-        </div>
-
-        <div style="padding: 15px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
-             <div class="blink" style="font-size: 0.75rem;">● SYSTEM ONLINE</div>
+            <div class="nav-group">
+                <div class="nav-sector-header"><span><i class="fas fa-users-gear"></i> Sector 05: Resources</span><i class="fas fa-chevron-down chevron"></i></div>
+                <ul class="nav-menu">
+                    <li class="nav-item" id="side-r1" onclick="loadDashboard('MANPOWER ALLOCATION', '#', this)"><i class="fas fa-caret-right"></i> Manpower Sync</li>
+                </ul>
+            </div>
+            <div class="nav-group">
+                <div class="nav-sector-header"><span><i class="fas fa-file-invoice-dollar"></i> Sector 06: Finance</span><i class="fas fa-chevron-down chevron"></i></div>
+                <ul class="nav-menu">
+                    <li class="nav-item" id="side-f1" onclick="loadDashboard('BUDGET CAP', '#', this)"><i class="fas fa-caret-right"></i> Financial Sync</li>
+                </ul>
+            </div>
         </div>
     </aside>
 
     <main id="main-content">
         <header>
-            <div class="report-title" id="current-title">LIVE TELEMETRY: RACE PACE</div>
+            <div class="report-title" id="current-title">MISSION CONTROL</div>
             <div class="telemetry-strip">
                 <div class="stat-box"><span class="stat-label">SESSION TIME</span><span class="stat-value" id="session-clock">00:00:00</span></div>
-                <div class="stat-box"><span class="stat-label">EFFICIENCY</span><span class="stat-value">98.2%</span></div>
-                <div class="stat-box"><span class="stat-label">DEFECTS</span><span class="stat-value" style="color:var(--neon-red)">0.04%</span></div>
                 <button class="f1-btn" onclick="toggleFullScreen()">Maximize</button>
             </div>
         </header>
 
-        <div class="iframe-container">
-            <iframe id="report-frame" src="https://app.powerbi.com/reportEmbed?reportId=e31a2005-48e3-4664-9836-01d808b063b1&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f" allowfullscreen></iframe>
+        <div id="landing-page">
+            <div class="welcome-header">
+                <h1>COMMAND CENTER</h1>
+                <p>SELECT A CATEGORY TO INITIALIZE DATA STREAM</p>
+            </div>
+            <div class="dashboard-grid">
+                <div class="sector-card" onclick="toggleCard(this)">
+                    <i class="fas fa-microchip main-icon"></i>
+                    <h3>Production</h3>
+                    <div class="sub-topic-container">
+                        <div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('FIRST HOUR EFFICIENCY', 'https://app.powerbi.com/reportEmbed?reportId=e31a2005-48e3-4664-9836-01d808b063b1&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', document.getElementById('side-p1'))"><i class="fas fa-caret-right"></i> First Hour EFF</div>
+                        <div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('SAH RECONCILIATION', 'https://app.powerbi.com/reportEmbed?reportId=bb05ff37-0b13-419b-9809-760177045c93&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', document.getElementById('side-p2'))"><i class="fas fa-caret-right"></i> SAH Recon</div>
+                        <div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('CUSTOMER WISE EFFICIENCY', 'https://app.powerbi.com/groups/me/reports/87d82c04-deb5-47a2-bc1c-8ba7216efe28/8b2c1e0e9d1141629e43?ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', document.getElementById('side-p3'))"><i class="fas fa-caret-right"></i> Customer EFF</div>
+                    </div>
+                </div>
+
+                <div class="sector-card" onclick="toggleCard(this)">
+                    <i class="fas fa-truck-fast main-icon"></i>
+                    <h3>Component Supply</h3>
+                    <div class="sub-topic-container">
+                        <div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('WAREHOUSE REQUESTS', 'https://app.powerbi.com/reportEmbed?reportId=eb5d0173-5ccb-4118-be40-6882f3e166d6&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', document.getElementById('side-s1'))"><i class="fas fa-caret-right"></i> CWH Requests</div>
+                        <div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('RM FULFILMENT', 'https://app.powerbi.com/groups/d4b9b3ef-47ef-442d-89a0-7135f5cba488/reports/20befc84-2349-4018-acfa-912896069d3b/832d904d3cc4776e5258', document.getElementById('side-s2'))"><i class="fas fa-caret-right"></i> RM Fulfilment</div>
+                    </div>
+                </div>
+
+                <div class="sector-card" onclick="toggleCard(this)">
+                    <i class="fas fa-clipboard-check main-icon"></i>
+                    <h3>Quality</h3>
+                    <div class="sub-topic-container">
+                        <div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('RFT TRACKER', 'https://app.powerbi.com/reportEmbed?reportId=38563379-de55-42bf-ad9a-94ac05df5206&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', document.getElementById('side-q1'))"><i class="fas fa-caret-right"></i> RFT Performance</div>
+                    </div>
+                </div>
+
+                <div class="sector-card" onclick="toggleCard(this)">
+                    <i class="fas fa-cog main-icon"></i>
+                    <h3>Engineering</h3>
+                    <div class="sub-topic-container">
+                        <div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('MACHINE UPTIME', '#', document.getElementById('side-e1'))"><i class="fas fa-caret-right"></i> Machine Uptime</div>
+                    </div>
+                </div>
+
+                <div class="sector-card" onclick="toggleCard(this)">
+                    <i class="fas fa-users-gear main-icon"></i>
+                    <h3>Resources</h3>
+                    <div class="sub-topic-container">
+                        <div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('MANPOWER ALLOCATION', '#', document.getElementById('side-r1'))"><i class="fas fa-caret-right"></i> Manpower Sync</div>
+                    </div>
+                </div>
+
+                <div class="sector-card" onclick="toggleCard(this)">
+                    <i class="fas fa-file-invoice-dollar main-icon"></i>
+                    <h3>Finance</h3>
+                    <div class="sub-topic-container">
+                        <div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('BUDGET CAP', '#', document.getElementById('side-f1'))"><i class="fas fa-caret-right"></i> Financial Sync</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="iframe-container" id="iframe-holder">
+            <iframe id="report-frame" src="" allowfullscreen></iframe>
         </div>
 
         <div class="footer-status">
@@ -228,47 +259,44 @@
     </main>
 
     <script>
-        // HANDLE LOADING SCREEN
         window.addEventListener('load', () => {
-            const msgs = ["Connecting to Brandix Server...", "Fetching Telemetry...", "Optimizing HUD...", "Ready."];
-            let i = 0;
-            const interval = setInterval(() => {
-                document.getElementById('load-msg').innerText = msgs[i];
-                i++;
-                if(i >= msgs.length) clearInterval(interval);
-            }, 700);
-
             setTimeout(() => {
                 const loader = document.getElementById('loader');
                 loader.style.opacity = '0';
-                setTimeout(() => {
-                    loader.style.visibility = 'hidden';
-                }, 800);
-            }, 3000); // Loads in 3 seconds
+                setTimeout(() => { loader.style.visibility = 'hidden'; }, 800);
+            }, 3000);
         });
 
+        function toggleCard(card) {
+            const expanded = card.classList.contains('expanded');
+            document.querySelectorAll('.sector-card').forEach(c => c.classList.remove('expanded'));
+            if (!expanded) card.classList.add('expanded');
+        }
+
+        function loadDashboard(title, url, element) {
+            document.getElementById('landing-page').style.display = 'none';
+            document.getElementById('iframe-holder').style.display = 'block';
+            document.getElementById('current-title').innerText = title;
+            document.getElementById('report-frame').src = url;
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            if(element) element.classList.add('active');
+        }
+
+        function goHome() {
+            document.getElementById('landing-page').style.display = 'block';
+            document.getElementById('iframe-holder').style.display = 'none';
+            document.getElementById('current-title').innerText = 'MISSION CONTROL';
+        }
+
         function updateClock() {
-            const now = new Date();
-            document.getElementById('session-clock').innerText = now.toLocaleTimeString('en-GB', { hour12: false });
+            document.getElementById('session-clock').innerText = new Date().toLocaleTimeString('en-GB', { hour12: false });
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        function loadDashboard(title, url, element) {
-            document.getElementById('current-title').innerText = title;
-            document.getElementById('report-frame').src = url;
-            let items = document.querySelectorAll('.nav-item');
-            items.forEach(item => item.classList.remove('active'));
-            element.classList.add('active');
-        }
-
         function toggleFullScreen() {
-            let elem = document.documentElement;
-            if (!document.fullscreenElement) {
-                elem.requestFullscreen();
-            } else {
-                document.exitFullscreen();
-            }
+            if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+            else document.exitFullscreen();
         }
     </script>
 </body>
