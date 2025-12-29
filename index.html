@@ -149,26 +149,39 @@
             <div class="nav-group">
                 <div class="nav-sector-header"><span><i class="fas fa-truck-fast"></i> Sector 02: RM Supply</span><i class="fas fa-chevron-down chevron"></i></div>
                 <ul class="nav-menu">
+		    <li class="nav-item" id="side-s1" onclick="loadDashboard('RM DASHBOARD', 'https://app.powerbi.com/reportEmbed?reportId=5588a1f0-2ed5-433c-b3a5-cbe3cc735390&appId=a64b4fdc-1793-42a6-97d2-f8084c8487da&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)"><i class="fas fa-caret-right"></i> RM Dashboard</li>
                     <li class="nav-item" id="side-s1" onclick="loadDashboard('WAREHOUSE REQUESTS', 'https://app.powerbi.com/reportEmbed?reportId=eb5d0173-5ccb-4118-be40-6882f3e166d6&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)"><i class="fas fa-caret-right"></i> CWH Requests</li>
                     <li class="nav-item" id="side-s2" onclick="loadDashboard('RM FULFILMENT', 'https://app.powerbi.com/reportEmbed?reportId=20befc84-2349-4018-acfa-912896069d3b&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)"><i class="fas fa-caret-right"></i> RM Fulfilment</li>
                     <li class="nav-item" id="side-s2" onclick="loadDashboard('CARTON ORDERING MODEL', 'https://app.powerbi.com/reportEmbed?reportId=2ad6187b-b79a-4a64-8e97-a0fdcbf0be17&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)"><i class="fas fa-caret-right"></i> Cartoon Ordering Model</li>
                 </ul>
             </div>
             <div class="nav-group">
-                <div class="nav-sector-header"><span><i class="fas fa-clipboard-check"></i> Sector 03: Quality</span><i class="fas fa-chevron-down chevron"></i></div>
+                <div class="nav-sector-header"><span><i class="fas fa-clipboard-check"></i> Sector 03: Cutting</span><i class="fas fa-chevron-down chevron"></i></div>
+                <ul class="nav-menu">
+                    <li class="nav-item" id="side-q1" onclick="loadDashboard('SPREADER UTILIZATION LIVE DASHBOARD', 'http://aws-bffsr-01:7400/', this)"><i class="fas fa-caret-right"></i>Spreader Live DB</li>
+		    <li class="nav-item" id="side-q1" onclick="loadDashboard('SPREADER UTILIZATION DASHBOARD', 'https://app.powerbi.com/reportEmbed?reportId=c29a72a7-dede-49e0-8b6e-6f7a4e268ba0&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)"><i class="fas fa-caret-right"></i>Spreader Utilization DB</li>
+                </ul>
+		<li class="nav-item" id="side-q1" onclick="loadDashboard('BEL CUTTING EFFICIENCY DASHBOARD', 'https://app.powerbi.com/reportEmbed?reportId=36084a36-1f87-4af0-970f-0bd97097cfc4&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)"><i class="fas fa-caret-right"></i>BEL Cutting EFF</li>
+                </ul>
+		<li class="nav-item" id="side-q1" onclick="loadDashboard('BFF CUTTING EFFICIENCY DASHBOARD', 'https://app.powerbi.com/reportEmbed?reportId=9342e546-7d56-4bb7-8d18-2110a9788b26&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D', this)"><i class="fas fa-caret-right"></i>BFF Cutting EFF</li>
+		<li class="nav-item" id="side-q1" onclick="loadDashboard('CUT KIT READINESS DASHBOARD', 'https://app.powerbi.com/reportEmbed?reportId=8a4dc8cf-af67-4d37-81d7-090a4649f2b1&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)"><i class="fas fa-caret-right"></i>CUt Kit Readiness</li>
+                </ul>
+            </div>
+            <div class="nav-group">
+                <div class="nav-sector-header"><span><i class="fas fa-clipboard-check"></i> Sector 04: Quality</span><i class="fas fa-chevron-down chevron"></i></div>
                 <ul class="nav-menu">
                     <li class="nav-item" id="side-q1" onclick="loadDashboard('RFT TRACKER', 'https://app.powerbi.com/reportEmbed?reportId=38563379-de55-42bf-ad9a-94ac05df5206&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)"><i class="fas fa-caret-right"></i> RFT Performance</li>
                 </ul>
             </div>
             <div class="nav-group">
-                <div class="nav-sector-header"><span><i class="fas fa-cog"></i> Sector 04: Engineering</span><i class="fas fa-chevron-down chevron"></i></div>
+                <div class="nav-sector-header"><span><i class="fas fa-cog"></i> Sector 05: Engineering</span><i class="fas fa-chevron-down chevron"></i></div>
                 <ul class="nav-menu">
                     <li class="nav-item" id="side-e1" onclick="loadDashboard('MACHINE DEMAND', 'https://app.powerbi.com/reportEmbed?reportId=dfc69de3-5cfd-44ef-990d-689995c32c92&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', this)"><i class="fas fa-caret-right"></i> Machine Demand</li>
                    <li class="nav-item" id="side-e2" onclick="loadDashboard('AUTOMATED MACHINE UTILIZATION', 'https://regionalautomation.dashboard.brandixlk.org/', this)"><i class="fas fa-caret-right"></i> Automated MC Utilization</li>
                 </ul>
             </div>
             <div class="nav-group">
-                <div class="nav-sector-header"><span><i class="fas fa-users-gear"></i> Sector 05: Resources</span><i class="fas fa-chevron-down chevron"></i></div>
+                <div class="nav-sector-header"><span><i class="fas fa-users-gear"></i> Sector 06: Resources</span><i class="fas fa-chevron-down chevron"></i></div>
                 <ul class="nav-menu">
                     <li class="nav-item" id="side-r1" onclick="loadDashboard('MANPOWER ALLOCATION', '#', this)"><i class="fas fa-caret-right"></i> Manpower Sync</li>
                 </ul>
@@ -215,10 +228,23 @@
                     <i class="fas fa-truck-fast main-icon"></i>
                     <h3>RM Supply</h3>
                     <div class="sub-topic-container">
+			<div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('RM DASHBOARD', 'https://app.powerbi.com/reportEmbed?reportId=5588a1f0-2ed5-433c-b3a5-cbe3cc735390&appId=a64b4fdc-1793-42a6-97d2-f8084c8487da&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', document.getElementById('side-s1'))"><i class="fas fa-caret-right"></i> RM Dashboard</div>
                         <div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('WAREHOUSE REQUESTS', 'https://app.powerbi.com/reportEmbed?reportId=eb5d0173-5ccb-4118-be40-6882f3e166d6&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', document.getElementById('side-s1'))"><i class="fas fa-caret-right"></i> CWH Requests</div>
                         <div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('RM FULFILMENT', 'https://app.powerbi.com/groups/d4b9b3ef-47ef-442d-89a0-7135f5cba488/reports/20befc84-2349-4018-acfa-912896069d3b/832d904d3cc4776e5258', document.getElementById('side-s2'))"><i class="fas fa-caret-right"></i> RM Fulfilment</div>
                         <div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('CARTON ORDERING MODEL', 'https://app.powerbi.com/reportEmbed?reportId=2ad6187b-b79a-4a64-8e97-a0fdcbf0be17&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', document.getElementById('side-s2'))"><i class="fas fa-caret-right"></i>Cartoon Ordering Model</div>
                     </div>
+                </div>
+
+                <div class="sector-card" onclick="toggleCard(this)">
+                    <i class="fas fa-clipboard-check main-icon"></i>
+                    <h3>Cutting</h3>
+                    <div class="sub-topic-container">
+                        <div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('SPREADER UTILIZATION LIVE DASHBOARD', 'http://aws-bffsr-01:7400/', document.getElementById('side-q1'))"><i class="fas fa-caret-right"></i> Spreader Live DB</div>
+                        <div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('SPREADER UTILIZATION DASHBOARD', 'https://app.powerbi.com/reportEmbed?reportId=c29a72a7-dede-49e0-8b6e-6f7a4e268ba0&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', document.getElementById('side-q1'))"><i class="fas fa-caret-right"></i> Spreader Utlization DB</div>
+                        <div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('BEL CUTTING EFFICIENCY DASHBOARD', 'https://app.powerbi.com/reportEmbed?reportId=36084a36-1f87-4af0-970f-0bd97097cfc4&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', document.getElementById('side-q1'))"><i class="fas fa-caret-right"></i>BEL Cutting EFF</div>
+			<div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('BFF CUTTING EFFICIENCY DASHBOARD', 'https://app.powerbi.com/reportEmbed?reportId=9342e546-7d56-4bb7-8d18-2110a9788b26&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D', document.getElementById('side-q1'))"><i class="fas fa-caret-right"></i>BFF Cutting EFF</div>
+			<div class="landing-sub-link" onclick="event.stopPropagation(); loadDashboard('CUT KIT READINESS DASHBOARD', 'https://app.powerbi.com/reportEmbed?reportId=8a4dc8cf-af67-4d37-81d7-090a4649f2b1&autoAuth=true&ctid=ea1f9c15-7f32-4dfa-b662-cacea1f61d0f', document.getElementById('side-q1'))"><i class="fas fa-caret-right"></i>Cut Kit Readiness</div>
+		    </div>
                 </div>
 
                 <div class="sector-card" onclick="toggleCard(this)">
@@ -313,7 +339,6 @@
     </script>
 </body>
 </html>
-
 
 
 
